@@ -10,7 +10,7 @@
     "setup": "node ./lib/setup.mjs"
   },
   "dependencies": {
-    "@primer/octicons-react": "^19.6.0",
+    "@primer/octicons-react": "^19.8.0",
     "@primer/react": "^35.28.0",
     "@upstash/redis": "^1.20.6",
     "@vercel/analytics": "^1.0.1",
