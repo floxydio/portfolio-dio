@@ -3,7 +3,7 @@ const users = async (req, res) => {
 	const { username } = req.query;
 
 	const response = await fetch('https://api.github.com/users/' + username, {
-		headers: { Authorization: `Bearer ${process.env.GH_TOKEN}` },
+		headers: { Authorization: `Bearer ${process.env.NEXT_PUBLIC_GITHUB_TOKEN}` },
 	});
 	const data = await response.json();
 

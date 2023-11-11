@@ -1,5 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+	env: {
+		NEXT_PUBLIC_GITHUB_TOKEN: process.env.GH_TOKEN,
+		NEXT_PUBLIC_VC_TOKEN: process.env.VC_TOKEN,
+	},
 	pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
 	experimental: {
 		// mdxRs: true,
