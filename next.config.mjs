@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+	reactStrictMode: true,
 	env: {
 		NEXT_PUBLIC_GITHUB_TOKEN: process.env.GH_TOKEN,
 		NEXT_PUBLIC_VC_TOKEN: process.env.VC_TOKEN,
