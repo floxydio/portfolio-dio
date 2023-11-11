@@ -30,7 +30,6 @@ export async function getSocialAccounts(username) {
 		headers: { Authorization: `Bearer ${process.env.NEXT_PUBLIC_GITHUB_TOKEN}` },
 		next: { MINUTES_5 }
 	});
-	console.timeEnd('getSocialAccounts');
 	return res.json();
 }
 
@@ -42,7 +41,6 @@ export const getPinnedRepos = cache(async (username) => {
 		body: JSON.stringify({ query: `{user(login: "${username}") {pinnedItems(first: 6, types: REPOSITORY) {nodes {... on Repository {name}}}}}` }),
 	});
 	const pinned = await res.json();
-	console.timeEnd('getPinnedRepos');
 	const names = pinned.data.user.pinnedItems.nodes.map((node) => node.name);
 	return names;
 });
@@ -57,7 +55,6 @@ export const getUserOrganizations = async (username) => {
 			query: `{user(login: "${username}") {organizations(first: 6) {nodes {name,websiteUrl,url,avatarUrl,description}}}}`
 		}),
 	});
-	console.timeEnd('getUserOrganizations');
 	return res.json();
 };
 
@@ -71,7 +68,6 @@ export const getVercelProjects = async () => {
 	const res = await fetch('https://api.vercel.com/v9/projects', {
 		headers: { Authorization: `Bearer ${process.env.NEXT_PUBLIC_VC_TOKEN}` },
 	});
-	console.timeEnd('getVercelProjects');
 	// eg. expired token.
 	if (!res.ok) {
 		console.error('Vercel API returned an error.', res.status, res.statusText);
@@ -142,7 +138,6 @@ export const getRecentUserActivity = cache(async (username) => {
 		headers: { Authorization: `Bearer ${process.env.NEXT_PUBLIC_GITHUB_TOKEN}` },
 	});
 	const response = await res.json();
-	console.timeEnd('getRecentUserActivity');
 	return response;
 }, HOURS_12);
 
