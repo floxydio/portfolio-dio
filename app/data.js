@@ -8,7 +8,7 @@ const HOURS_12 = 60 * 60 * 12;
 export async function getUser(username) {
 
 	const res = await fetch('https://api.github.com/users/' + username, {
-		headers: { Authorization: `Bearer ${process.env.NEXT_PUBLIC_GITHUB_TOKEN}` },
+		headers: { Authorization: `Bearer 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` },
 		next: { revalidate }
 	});
 	return res.json();
@@ -17,7 +17,7 @@ export async function getUser(username) {
 export async function getRepos(username) {
 
 	const res = await fetch('https://api.github.com/users/' + username + '/repos', {
-		headers: { Authorization: `Bearer ${process.env.NEXT_PUBLIC_GITHUB_TOKEN}` },
+		headers: { Authorization: `Bearer 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` },
 		next: { revalidate }
 	});
 
@@ -27,7 +27,7 @@ export async function getRepos(username) {
 export async function getSocialAccounts(username) {
 
 	const res = await fetch('https://api.github.com/users/' + username + '/social_accounts', {
-		headers: { Authorization: `Bearer ${process.env.NEXT_PUBLIC_GITHUB_TOKEN}` },
+		headers: { Authorization: `Bearer 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` },
 		next: { MINUTES_5 }
 	});
 	return res.json();
@@ -37,7 +37,7 @@ export const getPinnedRepos = cache(async (username) => {
 
 	const res = await fetch('https://api.github.com/graphql', {
 		method: 'POST',
-		headers: { Authorization: `Bearer ${process.env.NEXT_PUBLIC_GITHUB_TOKEN}` },
+		headers: { Authorization: `Bearer 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` },
 		body: JSON.stringify({ query: `{user(login: "${username}") {pinnedItems(first: 6, types: REPOSITORY) {nodes {... on Repository {name}}}}}` }),
 	});
 	const pinned = await res.json();
@@ -50,7 +50,7 @@ export const getUserOrganizations = async (username) => {
 	const res = await fetch('https://api.github.com/graphql', {
 		next: { MINUTES_5 },
 		method: 'POST',
-		headers: { Authorization: `Bearer ${process.env.NEXT_PUBLIC_GITHUB_TOKEN}` },
+		headers: { Authorization: `Bearer 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` },
 		body: JSON.stringify({
 			query: `{user(login: "${username}") {organizations(first: 6) {nodes {name,websiteUrl,url,avatarUrl,description}}}}`
 		}),
@@ -80,7 +80,7 @@ export const getVercelProjects = async () => {
 export const getNextjsLatestRelease = cache(async () => {
 	const res = await fetch('https://api.github.com/graphql', {
 		method: 'POST',
-		headers: { Authorization: `Bearer ${process.env.NEXT_PUBLIC_GITHUB_TOKEN}` },
+		headers: { Authorization: `Bearer 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` },
 		body: JSON.stringify({
 			query: `{
 				repository(name: "next.js", owner: "vercel") {
@@ -108,7 +108,7 @@ export const getNextjsLatestRelease = cache(async () => {
 export const getRepositoryPackageJson = cache(async (username, reponame) => {
 	const res = await fetch('https://api.github.com/graphql', {
 		method: 'POST',
-		headers: { Authorization: `Bearer ${process.env.NEXT_PUBLIC_GITHUB_TOKEN}` },
+		headers: { Authorization: `Bearer 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` },
 		body: JSON.stringify({
 			query: `{
 				repository(name: "${reponame}", owner: "${username}") {
@@ -135,7 +135,7 @@ export const getRecentUserActivity = cache(async (username) => {
 	console.log('Fetching recent activity for', username);
 	console.time('getRecentUserActivity');
 	const res = await fetch('https://api.github.com/users/' + username + '/events', {
-		headers: { Authorization: `Bearer ${process.env.NEXT_PUBLIC_GITHUB_TOKEN}` },
+		headers: { Authorization: `Bearer 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` },
 	});
 	const response = await res.json();
 	return response;
@@ -143,7 +143,7 @@ export const getRecentUserActivity = cache(async (username) => {
 
 export const getTrafficPageViews = async (username, reponame) => {
 	const res = await fetch('https://api.github.com/repos/' + username + '/' + reponame + '/traffic/views', {
-		headers: { Authorization: `Bearer ${process.env.NEXT_PUBLIC_GITHUB_TOKEN}` },
+		headers: { Authorization: `Bearer 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` },
 		next: { revalidate: HOURS_1 }
 	});
 	const response = await res.json();
@@ -160,7 +160,7 @@ export const getTrafficPageViews = async (username, reponame) => {
 
 export const getDependabotAlerts = cache(async (username, reponame) => {
 	const res = await fetch('https://api.github.com/repos/' + username + '/' + reponame + '/dependabot/alerts', {
-		headers: { Authorization: `Bearer ${process.env.NEXT_PUBLIC_GITHUB_TOKEN}` },
+		headers: { Authorization: `Bearer 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` },
 	});
 
 	const response = await res.json();
@@ -199,11 +199,11 @@ export async function checkAppJsxExistence(repoOwner, repoName) {
 	try {
 		const [isPagesRes, isAppLayoutRes] = await Promise.all([
 			fetch(urlPagesApp, {
-				headers: { Authorization: `Bearer ${process.env.NEXT_PUBLIC_GITHUB_TOKEN}` },
+				headers: { Authorization: `Bearer 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` },
 				next: { HOURS_12 }
 			}),
 			fetch(urlAppLayout, {
-				headers: { Authorization: `Bearer ${process.env.NEXT_PUBLIC_GITHUB_TOKEN}` },
+				headers: { Authorization: `Bearer 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` },
 				next: { HOURS_12 }
 			}),
 		]);
