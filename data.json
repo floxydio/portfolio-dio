@@ -1,11 +1,12 @@
 {
-	"description": "My hobby projects, most of them are using Golang/Flutter/Next.js/Laravel/Express.js",
-	"githubUsername": "floxydio",
-	"avatarUrl": "",
-	"displayName": "",
-	"email": "",
-	"projects": {
-		"blacklist": [],
-		"heroNames": []
-	}
+    "description": "Dio Okta R projects",
+    "githubUsername": "floxydio",
+    "avatarUrl": "",
+    "displayName": "",
+    "email": "",
+    "projects": {
+        "blacklist": [],
+        "heroNames": []
+    },
+    "socials": {}
 }
